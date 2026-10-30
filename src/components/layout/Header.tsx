@@ -4,7 +4,7 @@ import { href, type Locale, type RouteKey } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/dictionaries";
 import { HeaderNav, type NavItem } from "./HeaderNav";
 
-const navKeys = ["calculator", "converter", "hold", "search", "agents", "guides"] as const satisfies RouteKey[];
+const navKeys = ["calculator", "converter", "hold", "catalogs", "stores", "search", "agents", "guides"] as const satisfies RouteKey[];
 
 export function Header({ locale, t }: { locale: Locale; t: Dictionary }) {
   const items: NavItem[] = navKeys.map((key) => ({

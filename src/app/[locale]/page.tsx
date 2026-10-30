@@ -6,9 +6,11 @@ import {
   ArrowRightIcon,
   CompassIcon,
   CrateIcon,
+  LedgerIcon,
   LighthouseIcon,
   LinkIcon,
   SpyglassIcon,
+  StoreIcon,
   WeightIcon,
 } from "@/components/icons";
 import { guides } from "@/content/guides";
@@ -21,10 +23,15 @@ export default async function HomePage() {
   const locale = await getLocale();
   const t = dictionaryFor(locale);
 
-  const tools: { key: "calculator" | "converter" | "hold" | "search" | "agents"; icon: ReactNode }[] = [
+  const tools: {
+    key: "calculator" | "converter" | "hold" | "catalogs" | "stores" | "search" | "agents";
+    icon: ReactNode;
+  }[] = [
     { key: "calculator", icon: <WeightIcon className="h-6 w-6" /> },
     { key: "converter", icon: <LinkIcon className="h-6 w-6" /> },
     { key: "hold", icon: <CrateIcon className="h-6 w-6" /> },
+    { key: "catalogs", icon: <LedgerIcon className="h-6 w-6" /> },
+    { key: "stores", icon: <StoreIcon className="h-6 w-6" /> },
     { key: "search", icon: <SpyglassIcon className="h-6 w-6" /> },
     { key: "agents", icon: <LighthouseIcon className="h-6 w-6" /> },
   ];

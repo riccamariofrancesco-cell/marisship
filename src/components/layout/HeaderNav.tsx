@@ -49,7 +49,7 @@ export function HeaderNav({ locale, items, labels }: { locale: Locale; items: Na
 
   return (
     <>
-      <nav aria-label={labels.primary} className="hidden lg:block">
+      <nav aria-label={labels.primary} className="hidden xl:block">
         <ul className="flex items-center gap-1">
           {items.map((item) => (
             <li key={item.key}>
@@ -74,7 +74,7 @@ export function HeaderNav({ locale, items, labels }: { locale: Locale; items: Na
         <ThemeToggle toLight={labels.themeToLight} toDark={labels.themeToDark} />
         <button
           type="button"
-          className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-line bg-surface lg:hidden"
+          className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-line bg-surface xl:hidden"
           aria-expanded={open}
           aria-controls={panelId}
           aria-label={open ? labels.closeMenu : labels.menu}
@@ -87,7 +87,7 @@ export function HeaderNav({ locale, items, labels }: { locale: Locale; items: Na
       <div
         id={panelId}
         hidden={!open}
-        className="absolute inset-x-0 top-full border-b border-line bg-bg shadow-card lg:hidden"
+        className="absolute inset-x-0 top-full border-b border-line bg-bg shadow-card xl:hidden"
       >
         <nav aria-label={labels.primary} className="mx-auto max-w-6xl px-4 py-3 sm:px-6">
           <ul className="grid gap-1">

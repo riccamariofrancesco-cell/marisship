@@ -1,0 +1,91 @@
+{
+  "id": "tmall-picks",
+  "title": { "it": "Selezione Tmall", "en": "Tmall picks" },
+  "description": {
+    "it": "Articoli di negozi Tmall per casa, viaggio, hobby e regali, scelti dalla vetrina pubblica di un agent ed esclusi i prodotti con marchi o personaggi di terzi.",
+    "en": "Items from Tmall stores for home, travel, hobbies and gifts, picked from an agent's public showcase, leaving out products with third-party brands or characters."
+  },
+  "curator": "Marisship",
+  "lastVerified": "2026-10-30",
+  "source": "https://www.superbuy.com/en/",
+  "items": [
+    {
+      "marketplace": "tmall",
+      "id": "962247214572",
+      "title": { "it": "Felpa con cappuccio ricamata a mela, autunno/inverno", "en": "Hoodie with apple embroidery, autumn/winter" },
+      "category": "clothing",
+      "priceCny": 162.48
+    },
+    {
+      "marketplace": "tmall",
+      "id": "946414791710",
+      "title": { "it": "Set di 6 anelli in stile gotico", "en": "Set of 6 gothic-style rings" },
+      "category": "accessories",
+      "priceCny": 9.32
+    },
+    {
+      "marketplace": "tmall",
+      "id": "847968953695",
+      "title": { "it": "Scatola portaoggetti XL per vestiti, con coperchio e ruote", "en": "XL clothes storage box with lid and wheels" },
+      "category": "home"
+    },
+    {
+      "marketplace": "tmall",
+      "id": "863890913719",
+      "title": { "it": "Borsa per laptop impermeabile Naidun, 14–16 pollici", "en": "Naidun waterproof laptop bag, 14–16 inch" },
+      "category": "bags"
+    },
+    {
+      "marketplace": "tmall",
+      "id": "888467597137",
+      "title": { "it": "Carrello pieghevole da campeggio Day & Cloud", "en": "Day & Cloud foldable camping trolley" },
+      "category": "outdoor",
+      "priceCny": 655.88
+    },
+    {
+      "marketplace": "tmall",
+      "id": "922296378149",
+      "title": { "it": "Polpo giocattolo che balla", "en": "Dancing octopus toy" },
+      "category": "toys",
+      "priceCny": 48.34
+    },
+    {
+      "marketplace": "tmall",
+      "id": "715130578704",
+      "title": { "it": "Borsa in rete metallica, stile Y2K", "en": "Wire mesh bag, Y2K style" },
+      "category": "bags",
+      "priceCny": 101.68
+    },
+    {
+      "marketplace": "tmall",
+      "id": "814884548323",
+      "title": { "it": "Portagioie vintage Wasjoye", "en": "Wasjoye vintage jewellery box" },
+      "category": "home",
+      "priceCny": 95.52
+    },
+    {
+      "marketplace": "tmall",
+      "id": "736384864252",
+      "title": { "it": "Modellino in metallo della macchina volante di Leonardo", "en": "Metal model kit of da Vinci's flying machine" },
+      "category": "toys"
+    },
+    {
+      "marketplace": "tmall",
+      "id": "967133778131",
+      "title": { "it": "Mappamondo vintage in mattoncini Fermi", "en": "Fermi bricks vintage globe" },
+      "category": "toys"
+    },
+    {
+      "marketplace": "tmall",
+      "id": "648167945472",
+      "title": { "it": "Supporto in acciaio inox per canne da pesca", "en": "Stainless steel fishing rod holder" },
+      "category": "outdoor"
+    },
+    {
+      "marketplace": "tmall",
+      "id": "898600257194",
+      "title": { "it": "Tazza in ceramica \"Notte stellata\" con piattino e cucchiaino", "en": "\"Starry Night\" ceramic cup with saucer and spoon" },
+      "category": "home"
+    }
+  ]
+}

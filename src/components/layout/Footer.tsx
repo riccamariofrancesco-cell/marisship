@@ -6,7 +6,7 @@ import type { Dictionary } from "@/i18n/dictionaries";
 import { ISSUES_URL, REPO_URL } from "@/lib/site";
 
 export function Footer({ locale, t }: { locale: Locale; t: Dictionary }) {
-  const tools = (["calculator", "converter", "hold", "search"] as const).map((key) => ({
+  const tools = (["calculator", "converter", "hold", "catalogs", "stores", "search"] as const).map((key) => ({
     href: href(locale, key),
     label: t.nav[key],
   }));

@@ -139,3 +139,20 @@ export const AnchorIcon = (p: P) => (
     <path d="M4.5 13.5A7.5 7.5 0 0 0 12 21a7.5 7.5 0 0 0 7.5-7.5" />
   </Icon>
 );
+
+export const StoreIcon = (p: P) => (
+  <Icon {...p}>
+    <path d="M4 10v10h16V10" />
+    <path d="M3 10h18l-2-6H5z" />
+    <path d="M3 10a3 3 0 0 0 6 0 3 3 0 0 0 6 0 3 3 0 0 0 6 0" />
+    <path d="M10 20v-5h4v5" />
+  </Icon>
+);
+
+export const LedgerIcon = (p: P) => (
+  <Icon {...p}>
+    <path d="M5 4h11a3 3 0 0 1 3 3v13H8a3 3 0 0 1-3-3z" />
+    <path d="M5 17a3 3 0 0 1 3-3h11" />
+    <path d="M9 8h6M9 11h4" />
+  </Icon>
+);

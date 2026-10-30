@@ -56,7 +56,18 @@ test.describe("routing", () => {
 });
 
 test.describe("pages", () => {
-  for (const path of ["/it", "/en", "/it/convertitore-link", "/en/hold", "/it/agent", "/en/search", "/it/guide", "/en/privacy"]) {
+  for (const path of [
+    "/it",
+    "/en",
+    "/it/convertitore-link",
+    "/en/hold",
+    "/it/agent",
+    "/en/search",
+    "/it/guide",
+    "/en/privacy",
+    "/it/cataloghi",
+    "/en/official-stores",
+  ]) {
     test(`renders ${path} without errors or sideways scroll`, async ({ page }) => {
       const errors = trackErrors(page);
       const response = await page.goto(path);
@@ -178,5 +189,83 @@ test.describe("mobile navigation", () => {
     await page.getByRole("banner").getByRole("link", { name: "La Stiva" }).click();
     await expect(page).toHaveURL(/\/it\/stiva$/);
     await expect(page.getByRole("button", { name: "Menu" })).toHaveAttribute("aria-expanded", "false");
+  });
+});
+
+test.describe("official stores", () => {
+  test("lists verified stores and filters them", async ({ page }) => {
+    await page.goto("/it/negozi-ufficiali");
+    await expect(page.getByRole("heading", { level: 1, name: "Negozi ufficiali" })).toBeVisible();
+    await expect(page.getByTestId("store-card")).toHaveCount(16);
+    await page.getByLabel("Cerca un marchio").fill("lego");
+    await expect(page.getByTestId("store-card")).toHaveCount(1);
+    await expect(page.getByRole("link", { name: /Apri il negozio su Tmall/ })).toHaveAttribute("href", "https://lego.tmall.com/");
+    await page.getByLabel("Cerca un marchio").fill("");
+    await page.getByRole("button", { name: "Elettronica" }).click();
+    await expect(page.getByTestId("store-card")).toHaveCount(5);
+    await expect(page.getByTestId("stores-count")).toHaveText("Negozi: 5");
+  });
+});
+
+test.describe("catalogs", () => {
+  test("searches every catalog and shows results on the site", async ({ page }) => {
+    await page.goto("/en/catalogs");
+    const hits = page.getByTestId("catalog-hit");
+    await expect(hits).toHaveCount(12);
+    await page.getByLabel("What are you looking for?").fill("ceramic cup");
+    await expect(hits).toHaveCount(1);
+    await expect(hits.first()).toContainText("Starry Night");
+    await expect(hits.first().getByRole("link", { name: /Open on Tmall/ })).toHaveAttribute(
+      "href",
+      "https://detail.tmall.com/item.htm?id=898600257194",
+    );
+    await page.getByLabel("What are you looking for?").fill("");
+    await page.getByLabel("Category").selectOption("toys");
+    const toys = await hits.count();
+    expect(toys).toBeGreaterThan(0);
+    for (let i = 0; i < toys; i++) await expect(hits.nth(i)).toContainText("Toys and hobbies");
+    await page.getByLabel("What are you looking for?").fill("zzzz-nothing");
+    await expect(page.getByText("Nothing found.")).toBeVisible();
+  });
+
+  test("stows a catalog item in the Hold", async ({ page }) => {
+    await page.goto("/it/cataloghi");
+    await page.getByLabel("Cosa stai cercando?").fill("tazza");
+    await page.getByTestId("catalog-hit").first().getByRole("button", { name: "Metti nella Stiva" }).click();
+    await page.goto("/it/stiva");
+    await expect(page.getByTestId("hold-item")).toHaveCount(1);
+    await expect(page.getByTestId("hold-item")).toContainText("Notte stellata");
+  });
+});
+
+test.describe("CSV import", () => {
+  const csv = [
+    "Nome;Link articolo;Prezzo (CNY);Quantità;Peso (g)",
+    `Tazza;https://item.taobao.com/item.htm?id=${TB};35,5;2;300`,
+    "Quaderno;https://weidian.com/item.html?itemID=7412345678;12;1;0,2 kg",
+    "Senza link;;5;1;100",
+  ].join("\n");
+
+  test("imports a CSV file after a preview", async ({ page }) => {
+    await page.goto("/it/stiva");
+    await page.getByTestId("hold-file").setInputFiles({ name: "lista.csv", mimeType: "text/csv", buffer: Buffer.from(csv) });
+    await expect(page.getByTestId("csv-preview")).toContainText("Articoli trovati: 3 · con link riconosciuto: 2.");
+    await page.getByRole("button", { name: "Aggiungi alla Stiva" }).click();
+    await expect(page.getByTestId("hold-item")).toHaveCount(3);
+    await expect(page.getByTestId("hold-count")).toHaveText("4");
+    await expect(page.getByTestId("hold-weight")).toHaveText("900 g");
+  });
+
+  test("imports pasted CSV text and reports unusable input", async ({ page }) => {
+    await page.goto("/en/hold");
+    await page.locator("summary", { hasText: "Paste CSV text" }).click();
+    await page.getByLabel("Paste CSV text").fill("price,qty\n1,2");
+    await page.getByRole("button", { name: "Read" }).click();
+    await expect(page.getByText("No usable rows")).toBeVisible();
+    await page.getByLabel("Paste CSV text").fill(`link,name\nhttps://detail.1688.com/offer/687654321012.html,Lamp`);
+    await page.getByRole("button", { name: "Read" }).click();
+    await page.getByRole("button", { name: "Add to the Hold" }).click();
+    await expect(page.getByTestId("hold-item")).toHaveCount(1);
+    await expect(page.getByText("Items added to the Hold: 1.")).toBeVisible();
   });
 });

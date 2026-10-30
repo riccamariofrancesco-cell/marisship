@@ -17,6 +17,8 @@ export const routes = {
   hold: { en: "hold", it: "stiva" },
   agents: { en: "agents", it: "agent" },
   search: { en: "search", it: "ricerca" },
+  catalogs: { en: "catalogs", it: "cataloghi" },
+  stores: { en: "official-stores", it: "negozi-ufficiali" },
   guides: { en: "guides", it: "guide" },
   privacy: { en: "privacy", it: "privacy" },
   terms: { en: "terms", it: "termini" },
