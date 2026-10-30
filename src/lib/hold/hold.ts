@@ -6,6 +6,7 @@ import { readLocal, writeLocal } from "@/lib/local-store";
 // The Hold: a haul planner kept in the visitor's own browser.
 
 export const STORAGE_KEY = "marisship:hold:v1";
+export const MAX_ITEMS = 500;
 
 export const holdItemSchema = z.object({
   id: z.string().min(1).max(64),
@@ -24,7 +25,7 @@ const holdFileSchema = z.object({
   app: z.literal("marisship"),
   kind: z.literal("hold"),
   version: z.literal(1),
-  items: z.array(holdItemSchema).max(500),
+  items: z.array(holdItemSchema).max(MAX_ITEMS),
 });
 
 export interface NewItemInput {

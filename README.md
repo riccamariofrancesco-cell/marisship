@@ -4,7 +4,9 @@ Strumenti gratuiti e open source per chi compra dalla Cina (Taobao, Tmall, Weidi
 
 - **Calcolatore spedizioni**: peso reale e volumetrico, scaglioni, supplemento carburante, sconti e commissioni, con cambio BCE.
 - **Convertitore link**: da link di marketplace o di agent a link puliti per ogni agent supportato; espande i link brevi ufficiali.
-- **La Stiva**: pianificatore di carico nel browser, con totali di prezzo e peso da passare al calcolatore.
+- **La Stiva**: pianificatore di carico nel browser, con totali di prezzo e peso da passare al calcolatore; importa liste in CSV (anche da Google Sheets).
+- **Cataloghi**: ricerca contemporanea in tutti i cataloghi curati di prodotti legittimi, con risultati, link per gli agent e "metti nella Stiva" direttamente sul sito.
+- **Negozi ufficiali**: i negozi ufficiali dei marchi su Tmall, verificati uno per uno.
 - **Ricerca marketplace**: apre la ricerca ufficiale di Taobao, Tmall e 1688, con un prontuario di parole chiave in cinese.
 - **Agent** e **guide**: elenco neutrale e guide in parole semplici.
 
@@ -65,6 +67,36 @@ Le tariffe per il confronto stanno in `src/data/shipping-lines.json` e vengono v
   "source": "https://…"
 }
 ```
+
+### Aggiungere un catalogo
+
+I cataloghi stanno in `src/data/catalogs/`, un file JSON ciascuno, registrato in `src/lib/catalogs/catalogs.ts`. Lo schema viene validato durante il build. **Solo prodotti legittimi**: niente repliche, niente articoli con marchi o personaggi di terzi senza licenza.
+
+```json
+{
+  "id": "nome-catalogo",
+  "title": { "it": "Titolo", "en": "Title" },
+  "description": { "it": "…", "en": "…" },
+  "curator": "Chi lo cura",
+  "lastVerified": "2026-10-30",
+  "source": "https://…",
+  "items": [
+    {
+      "marketplace": "tmall",
+      "id": "123456789012",
+      "title": { "it": "Nome dell'articolo", "en": "Item name" },
+      "category": "home",
+      "priceCny": 59.9
+    }
+  ]
+}
+```
+
+`marketplace` è uno tra `taobao`, `tmall`, `weidian`, `1688`. `category` è una delle categorie in `src/data/categories.ts`. `priceCny` è facoltativo ed è indicativo alla data `lastVerified`.
+
+### Aggiungere un negozio ufficiale
+
+I negozi stanno in `src/data/stores.ts`. Un negozio entra solo se la sua pagina su Tmall si apre e porta il nome ufficiale del marchio (官方旗舰店 o 旗舰店). Negozi con nomi simili, ma di altri titolari, restano fuori.
 
 ## Contatti
 

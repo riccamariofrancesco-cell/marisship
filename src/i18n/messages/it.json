@@ -28,8 +28,12 @@
       "hold": "Stiva",
       "search": "Ricerca",
       "agents": "Agent",
-      "guides": "Guide"
-    }
+      "guides": "Guide",
+      "catalogs": "Cataloghi",
+      "stores": "Negozi"
+    },
+    "catalogs": "Cataloghi",
+    "stores": "Negozi ufficiali"
   },
   "footer": {
     "tagline": "Una bussola gratuita per gli acquisti in Cina.",
@@ -57,13 +61,15 @@
     "ctaCalculator": "Stima una spedizione",
     "ctaConverter": "Converti un link",
     "toolsTitle": "La cassetta degli attrezzi",
-    "toolsIntro": "Cinque strumenti che funzionano nel tuo browser, in italiano e in inglese.",
+    "toolsIntro": "Sette strumenti che funzionano nel tuo browser, in italiano e in inglese.",
     "tools": {
       "calculator": "Peso reale e volumetrico, commissioni e sconti in un unico totale onesto.",
       "converter": "Trasforma un link di marketplace o di agent in link puliti per ogni agent supportato.",
       "hold": "Raccogli gli articoli, somma prezzi e pesi e scopri quanto peserà il pacco.",
       "search": "Vai alla ricerca ufficiale di Taobao, Tmall e 1688, con un prontuario di parole chiave in cinese.",
-      "agents": "Un elenco neutrale degli agent e di cosa Marisship sa fare con i loro link."
+      "agents": "Un elenco neutrale degli agent e di cosa Marisship sa fare con i loro link.",
+      "catalogs": "Cerca in tutti i cataloghi curati in una volta e vedi i risultati qui, con i link per gli agent.",
+      "stores": "I negozi ufficiali dei marchi su Tmall, verificati uno per uno."
     },
     "stepsTitle": "Dal link alla porta di casa in tre mosse",
     "steps": [
@@ -215,7 +221,17 @@
     "colWeight": "Peso",
     "colSubtotal": "Subtotale",
     "untitled": "Articolo senza nome",
-    "convertLink": "Converti"
+    "convertLink": "Converti",
+    "importBoth": "Importa (JSON o CSV)",
+    "csvTitle": "Importa da CSV o Google Sheets",
+    "csvHelp": "Colonne riconosciute: link, nome, prezzo, quantità, peso (in italiano, inglese o cinese). Da Google Sheets: File → Scarica → CSV.",
+    "csvPaste": "Incolla il testo CSV",
+    "csvRead": "Leggi",
+    "csvPreview": "Articoli trovati: {n} · con link riconosciuto: {m}.",
+    "csvConfirm": "Aggiungi alla Stiva",
+    "csvCancel": "Annulla",
+    "csvEmpty": "Nessuna riga utilizzabile: il CSV deve avere almeno una colonna con i link o con i nomi.",
+    "csvAdded": "Articoli aggiunti alla Stiva: {n}."
   },
   "search": {
     "title": "Ricerca nei marketplace",
@@ -275,5 +291,65 @@
     "title": "Disperso in mare",
     "text": "Questa pagina non esiste o è stata spostata.",
     "home": "Torna in porto"
+  },
+  "categories": {
+    "electronics": "Elettronica",
+    "home": "Casa",
+    "appliances": "Elettrodomestici",
+    "clothing": "Abbigliamento",
+    "sport": "Sport",
+    "bags": "Borse",
+    "accessories": "Accessori",
+    "toys": "Giochi e hobby",
+    "stationery": "Cancelleria",
+    "outdoor": "Outdoor"
+  },
+  "stores": {
+    "title": "Negozi ufficiali",
+    "metaDescription": "I negozi ufficiali dei marchi su Tmall, verificati uno per uno: elettronica, sport, abbigliamento, casa, giochi e cancelleria.",
+    "intro": "I marchi hanno i loro negozi ufficiali su Tmall: comprare lì evita falsi e venditori poco chiari. Ogni negozio qui sotto è stato verificato su Tmall e i nomi simili sono esclusi.",
+    "search": "Cerca un marchio",
+    "placeholder": "es. Xiaomi, LEGO, 李宁",
+    "all": "Tutti",
+    "open": "Apri il negozio su Tmall",
+    "count": "Negozi: {n}",
+    "empty": "Nessun negozio corrisponde alla ricerca.",
+    "howTitle": "Come comprare da un negozio ufficiale",
+    "howText": "Apri il negozio, scegli l'articolo, copia il link e incollalo nel convertitore: ottieni il link per il tuo agent.",
+    "checkedTitle": "Come verifichiamo",
+    "checkedText": "La pagina del negozio su Tmall deve aprirsi e riportare il nome ufficiale del marchio (官方旗舰店 o 旗舰店). Ultimo controllo: {date}. Conosci un negozio ufficiale che manca? Proponilo su GitHub.",
+    "suggest": "Proponi un negozio",
+    "notes": {
+      "plugs": "Spine cinesi e 220 V: può servire un adattatore."
+    },
+    "categoryFilter": "Filtra per categoria"
+  },
+  "catalogs": {
+    "title": "Cataloghi",
+    "metaDescription": "Cerca nei cataloghi curati di prodotti legittimi da Taobao, Tmall, Weidian e 1688, con risultati e link per gli agent direttamente su Marisship.",
+    "intro": "Cerca in tutti i cataloghi insieme: i risultati compaiono qui, con il link pulito, quello per il tuo agent e un pulsante per mettere l'articolo nella Stiva. I cataloghi contengono solo prodotti legittimi.",
+    "search": "Cosa stai cercando?",
+    "placeholder": "es. tazza, lampada, zaino",
+    "catalog": "Catalogo",
+    "allCatalogs": "Tutti i cataloghi",
+    "category": "Categoria",
+    "allCategories": "Tutte le categorie",
+    "marketplace": "Marketplace",
+    "allMarketplaces": "Tutti i marketplace",
+    "maxPrice": "Prezzo massimo (CNY)",
+    "results": "Risultati: {n} · cataloghi: {c}",
+    "empty": "Nessun risultato. Prova con meno parole o parole diverse.",
+    "price": "Prezzo indicativo al {date}",
+    "open": "Apri su {marketplace}",
+    "agentLink": "Link per {agent}",
+    "convert": "Link per tutti gli agent",
+    "listTitle": "I cataloghi",
+    "items": "Articoli: {n}",
+    "curator": "A cura di {name}",
+    "verified": "Verificato il {date}",
+    "source": "Fonte",
+    "contributeTitle": "Aggiungi un catalogo",
+    "contributeText": "Un catalogo è un file JSON nel repository: solo prodotti legittimi, con titolo, categoria e link dell'articolo. Apri una pull request o una issue su GitHub.",
+    "contribute": "Come aggiungere un catalogo"
   }
 }

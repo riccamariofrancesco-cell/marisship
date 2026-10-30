@@ -28,8 +28,12 @@
       "hold": "Hold",
       "search": "Search",
       "agents": "Agents",
-      "guides": "Guides"
-    }
+      "guides": "Guides",
+      "catalogs": "Catalogs",
+      "stores": "Stores"
+    },
+    "catalogs": "Catalogs",
+    "stores": "Official stores"
   },
   "footer": {
     "tagline": "A free compass for shopping in China.",
@@ -57,13 +61,15 @@
     "ctaCalculator": "Estimate shipping",
     "ctaConverter": "Convert a link",
     "toolsTitle": "The toolkit",
-    "toolsIntro": "Five tools that run in your browser, in English and Italian.",
+    "toolsIntro": "Seven tools that run in your browser, in English and Italian.",
     "tools": {
       "calculator": "Actual and volumetric weight, fees and discounts in one honest total.",
       "converter": "Turn a marketplace or agent link into clean links for every supported agent.",
       "hold": "Collect items, add up price and weight, and see what your parcel will weigh.",
       "search": "Jump to the official search on Taobao, Tmall and 1688, with a Chinese keyword cheat sheet.",
-      "agents": "A neutral list of agents and what Marisship can do with their links."
+      "agents": "A neutral list of agents and what Marisship can do with their links.",
+      "catalogs": "Search every curated catalog at once and see the results right here, with agent links.",
+      "stores": "Brands' official Tmall flagship stores, checked one by one."
     },
     "stepsTitle": "From link to doorstep in three moves",
     "steps": [
@@ -215,7 +221,17 @@
     "colWeight": "Weight",
     "colSubtotal": "Subtotal",
     "untitled": "Untitled item",
-    "convertLink": "Convert"
+    "convertLink": "Convert",
+    "importBoth": "Import (JSON or CSV)",
+    "csvTitle": "Import from CSV or Google Sheets",
+    "csvHelp": "Recognised columns: link, name, price, quantity, weight (in English, Italian or Chinese). From Google Sheets: File → Download → CSV.",
+    "csvPaste": "Paste CSV text",
+    "csvRead": "Read",
+    "csvPreview": "Items found: {n} · with a recognised link: {m}.",
+    "csvConfirm": "Add to the Hold",
+    "csvCancel": "Cancel",
+    "csvEmpty": "No usable rows: the CSV needs at least a link or a name column.",
+    "csvAdded": "Items added to the Hold: {n}."
   },
   "search": {
     "title": "Marketplace search",
@@ -275,5 +291,65 @@
     "title": "Lost at sea",
     "text": "This page doesn't exist or has moved.",
     "home": "Back to port"
+  },
+  "categories": {
+    "electronics": "Electronics",
+    "home": "Home",
+    "appliances": "Appliances",
+    "clothing": "Clothing",
+    "sport": "Sport",
+    "bags": "Bags",
+    "accessories": "Accessories",
+    "toys": "Toys and hobbies",
+    "stationery": "Stationery",
+    "outdoor": "Outdoor"
+  },
+  "stores": {
+    "title": "Official stores",
+    "metaDescription": "Official brand flagship stores on Tmall, checked one by one: electronics, sport, clothing, home, toys and stationery.",
+    "intro": "Brands run their own flagship stores on Tmall: buying there avoids fakes and unclear sellers. Every store below was checked on Tmall, and lookalikes are left out.",
+    "search": "Search a brand",
+    "placeholder": "e.g. Xiaomi, LEGO, 李宁",
+    "all": "All",
+    "open": "Open the store on Tmall",
+    "count": "Stores: {n}",
+    "empty": "No store matches your search.",
+    "howTitle": "How to buy from an official store",
+    "howText": "Open the store, pick an item, copy its link and paste it into the link converter: you get the link for your agent.",
+    "checkedTitle": "How we check",
+    "checkedText": "The store page on Tmall must load and carry the brand's official name (官方旗舰店 or 旗舰店). Last check: {date}. Know an official store we're missing? Suggest it on GitHub.",
+    "suggest": "Suggest a store",
+    "notes": {
+      "plugs": "Chinese plugs and 220 V: you may need an adapter."
+    },
+    "categoryFilter": "Filter by category"
+  },
+  "catalogs": {
+    "title": "Catalogs",
+    "metaDescription": "Search curated catalogs of legitimate products from Taobao, Tmall, Weidian and 1688, with results and agent links right on Marisship.",
+    "intro": "Search every catalog at once: results appear here, with the clean link, the link for your agent and a button to stow the item in the Hold. Catalogs list legitimate products only.",
+    "search": "What are you looking for?",
+    "placeholder": "e.g. cup, lamp, backpack",
+    "catalog": "Catalog",
+    "allCatalogs": "All catalogs",
+    "category": "Category",
+    "allCategories": "All categories",
+    "marketplace": "Marketplace",
+    "allMarketplaces": "All marketplaces",
+    "maxPrice": "Max price (CNY)",
+    "results": "Results: {n} · catalogs: {c}",
+    "empty": "Nothing found. Try fewer or different words.",
+    "price": "Indicative price on {date}",
+    "open": "Open on {marketplace}",
+    "agentLink": "Link for {agent}",
+    "convert": "Links for every agent",
+    "listTitle": "The catalogs",
+    "items": "Items: {n}",
+    "curator": "Curated by {name}",
+    "verified": "Checked on {date}",
+    "source": "Source",
+    "contributeTitle": "Add a catalog",
+    "contributeText": "A catalog is a JSON file in the repository: legitimate products only, with title, category and item link. Open a pull request or an issue on GitHub.",
+    "contribute": "How to add a catalog"
   }
 }

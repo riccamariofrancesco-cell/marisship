@@ -6,8 +6,10 @@ import { ArrowRightIcon, ExternalIcon, LinkIcon, TrashIcon } from "@/components/
 import { Field, toNumber } from "@/components/ui/Field";
 import type { Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/dictionaries";
-import { formatMoney, formatWeight } from "@/i18n/format";
+import { fill, formatMoney, formatWeight } from "@/i18n/format";
+import { parseCsv, rowsToItems } from "@/lib/hold/csv";
 import {
+  MAX_ITEMS,
   STORAGE_KEY,
   createItem,
   itemsFromStorage,
@@ -41,12 +43,36 @@ export function Hold({
   const available = useStorageAvailable();
   const [form, setForm] = useState(emptyForm);
   const [notice, setNotice] = useState("");
+  const [importNotice, setImportNotice] = useState("");
+  const [csvText, setCsvText] = useState("");
+  const [pending, setPending] = useState<{ items: HoldItem[]; recognised: number } | null>(null);
   const fileInput = useRef<HTMLInputElement>(null);
   const sum = totals(items);
   const cny = (value: number) => formatMoney(locale, value, "CNY");
 
   function update(next: HoldItem[]) {
-    saveHold(next);
+    // Never store more than the export format accepts, or the Hold would not load back.
+    saveHold(next.slice(0, MAX_ITEMS));
+  }
+
+  function previewCsv(text: string) {
+    const rows = rowsToItems(parseCsv(text)).items;
+    if (!rows.length) {
+      setPending(null);
+      setImportNotice(t.csvEmpty);
+      return;
+    }
+    const created = rows.map((row) => createItem(row));
+    setPending({ items: created.map((c) => c.item), recognised: created.filter((c) => c.recognised).length });
+    setImportNotice("");
+  }
+
+  function confirmCsv() {
+    if (!pending) return;
+    update([...items, ...pending.items]);
+    setImportNotice(fill(t.csvAdded, { n: Math.max(0, Math.min(pending.items.length, MAX_ITEMS - items.length)) }));
+    setPending(null);
+    setCsvText("");
   }
 
   function add(event: React.FormEvent) {
@@ -83,14 +109,21 @@ export function Hold({
     const file = event.target.files?.[0];
     event.target.value = "";
     if (!file) return;
-    const imported = file.size < 1_000_000 ? parseHoldFile(await file.text()) : null;
-    if (!imported) {
-      setNotice(t.importError);
+    if (file.size > 1_000_000) {
+      setImportNotice(t.importError);
       return;
     }
-    const known = new Set(items.map((item) => item.id));
-    update([...items, ...imported.filter((item) => !known.has(item.id))]);
-    setNotice("");
+    const text = await file.text();
+    const imported = parseHoldFile(text);
+    if (imported) {
+      const known = new Set(items.map((item) => item.id));
+      update([...items, ...imported.filter((item) => !known.has(item.id))]);
+      setImportNotice("");
+    } else if (/\.json$/i.test(file.name)) {
+      setImportNotice(t.importError);
+    } else {
+      previewCsv(text);
+    }
   }
 
   function clearAll() {
@@ -148,6 +181,53 @@ export function Hold({
             </p>
           ) : null}
         </form>
+
+        <section className="card p-5 sm:p-6" aria-labelledby={`${id}-csv`}>
+          <h2 id={`${id}-csv`} className="font-display text-xl font-semibold">
+            {t.csvTitle}
+          </h2>
+          <p className="mt-1 text-sm leading-relaxed text-muted">{t.csvHelp}</p>
+          <button type="button" className="btn btn-ghost mt-4" onClick={() => fileInput.current?.click()}>
+            {t.importBoth}
+          </button>
+          <details className="mt-4">
+            <summary className="cursor-pointer text-sm font-semibold text-link">{t.csvPaste}</summary>
+            <label htmlFor={`${id}-csvtext`} className="sr-only">
+              {t.csvPaste}
+            </label>
+            <textarea
+              id={`${id}-csvtext`}
+              className="field mt-2 font-mono text-xs"
+              value={csvText}
+              onChange={(e) => setCsvText(e.target.value)}
+              placeholder={"link,name,price,qty,weight\nhttps://item.taobao.com/item.htm?id=…,…,59.9,1,300"}
+              spellCheck={false}
+            />
+            <button type="button" className="btn btn-ghost mt-2" onClick={() => previewCsv(csvText)} disabled={!csvText.trim()}>
+              {t.csvRead}
+            </button>
+          </details>
+          {pending ? (
+            <div role="status" className="mt-4 rounded-xl bg-foam p-4" data-testid="csv-preview">
+              <p className="text-sm font-semibold">
+                {fill(t.csvPreview, { n: pending.items.length, m: pending.recognised })}
+              </p>
+              <div className="mt-3 flex flex-wrap gap-2">
+                <button type="button" className="btn btn-primary" onClick={confirmCsv}>
+                  {t.csvConfirm}
+                </button>
+                <button type="button" className="btn btn-ghost" onClick={() => setPending(null)}>
+                  {t.csvCancel}
+                </button>
+              </div>
+            </div>
+          ) : null}
+          {importNotice ? (
+            <p role="status" className="mt-3 text-sm font-semibold text-accent-text">
+              {importNotice}
+            </p>
+          ) : null}
+        </section>
       </div>
 
       <aside className="lg:sticky lg:top-24" aria-labelledby={`${id}-summary`}>
@@ -189,7 +269,16 @@ export function Hold({
               <button type="button" className="btn btn-ghost" onClick={() => fileInput.current?.click()}>
                 {t.import}
               </button>
-              <input ref={fileInput} type="file" accept="application/json,.json" className="sr-only" tabIndex={-1} onChange={importFile} aria-hidden="true" />
+              <input
+                ref={fileInput}
+                type="file"
+                accept="application/json,.json,text/csv,.csv,text/plain,.txt,.tsv"
+                className="sr-only"
+                tabIndex={-1}
+                onChange={importFile}
+                aria-hidden="true"
+                data-testid="hold-file"
+              />
               <button type="button" className="btn btn-ghost" onClick={clearAll} disabled={!items.length}>
                 {t.clearAll}
               </button>
