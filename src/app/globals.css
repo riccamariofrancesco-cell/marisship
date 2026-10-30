@@ -1,0 +1,309 @@
+@import "tailwindcss";
+
+/* Marisship palette: abyss, ocean, sea, sand, foam, coral, brass. */
+:root {
+  color-scheme: light;
+  --bg: #f6efe3;
+  --surface: #fffbf4;
+  --surface-2: #efe5d3;
+  --ink: #0b1f3a;
+  --muted: #4b5a6e;
+  --line: #e1d5c1;
+  --ocean: #12355b;
+  --link: #175a72;
+  --sea: #1f6f8b;
+  --foam: #e3eef0;
+  --accent: #ff6b4a;
+  --on-accent: #0b1f3a;
+  --accent-text: #a8361f;
+  --brass: #b08a1e;
+  --on-ocean: #f6efe3;
+  --band: #12355b;
+  --on-band: #f6efe3;
+  --focus: #1f6f8b;
+  --shadow: 0 1px 2px rgb(11 31 58 / 0.06), 0 8px 24px -12px rgb(11 31 58 / 0.18);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --bg: #0b1f3a;
+    --surface: #11294a;
+    --surface-2: #17345c;
+    --ink: #f6efe3;
+    --muted: #b7c3d3;
+    --line: #24456f;
+    --ocean: #9ccfe0;
+    --link: #7cc4da;
+    --sea: #5fb3cc;
+    --foam: #143a5f;
+    --accent: #ff7a5c;
+    --on-accent: #0b1f3a;
+    --accent-text: #ff8f75;
+    --brass: #d9b54a;
+    --on-ocean: #0b1f3a;
+    --band: #071629;
+    --on-band: #f6efe3;
+    --focus: #7cc4da;
+    --shadow: 0 1px 2px rgb(0 0 0 / 0.3), 0 10px 30px -12px rgb(0 0 0 / 0.5);
+  }
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #0b1f3a;
+  --surface: #11294a;
+  --surface-2: #17345c;
+  --ink: #f6efe3;
+  --muted: #b7c3d3;
+  --line: #24456f;
+  --ocean: #9ccfe0;
+  --link: #7cc4da;
+  --sea: #5fb3cc;
+  --foam: #143a5f;
+  --accent: #ff7a5c;
+  --on-accent: #0b1f3a;
+  --accent-text: #ff8f75;
+  --brass: #d9b54a;
+  --on-ocean: #0b1f3a;
+  --band: #071629;
+  --on-band: #f6efe3;
+  --focus: #7cc4da;
+  --shadow: 0 1px 2px rgb(0 0 0 / 0.3), 0 10px 30px -12px rgb(0 0 0 / 0.5);
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-ocean: var(--ocean);
+  --color-link: var(--link);
+  --color-sea: var(--sea);
+  --color-foam: var(--foam);
+  --color-accent: var(--accent);
+  --color-on-accent: var(--on-accent);
+  --color-accent-text: var(--accent-text);
+  --color-brass: var(--brass);
+  --color-on-ocean: var(--on-ocean);
+  --color-band: var(--band);
+  --color-on-band: var(--on-band);
+  --font-sans: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-fraunces), ui-serif, Georgia, serif;
+  --shadow-card: var(--shadow);
+}
+
+html {
+  background: var(--bg);
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-feature-settings: "ss01";
+  overflow-x: hidden;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--on-accent);
+}
+
+:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+a {
+  color: inherit;
+}
+
+.link {
+  color: var(--link);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+.link:hover {
+  text-decoration-thickness: 2px;
+}
+
+/* Form controls share one look across tools. */
+.field {
+  width: 100%;
+  min-height: 2.75rem;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--ink);
+  border-radius: 0.75rem;
+  padding: 0.55rem 0.8rem;
+  font: inherit;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+.field:hover {
+  border-color: var(--sea);
+}
+.field:focus-visible {
+  outline: none;
+  border-color: var(--sea);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--sea) 35%, transparent);
+}
+.field::placeholder {
+  color: color-mix(in srgb, var(--muted) 75%, transparent);
+}
+textarea.field {
+  min-height: 8rem;
+  resize: vertical;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 2.75rem;
+  padding: 0.6rem 1.15rem;
+  border-radius: 999px;
+  font-weight: 700;
+  line-height: 1.1;
+  text-decoration: none;
+  transition: transform 0.15s ease, background-color 0.15s ease, box-shadow 0.15s ease;
+  cursor: pointer;
+}
+.btn:active {
+  transform: translateY(1px);
+}
+.btn-primary {
+  background: var(--accent);
+  color: var(--on-accent);
+  box-shadow: 0 6px 18px -10px color-mix(in srgb, var(--accent) 80%, black);
+}
+.btn-primary:hover {
+  background: color-mix(in srgb, var(--accent) 88%, white);
+}
+.btn-secondary {
+  background: var(--ocean);
+  color: var(--on-ocean);
+}
+.btn-secondary:hover {
+  background: color-mix(in srgb, var(--ocean) 88%, var(--sea));
+}
+.btn-ghost {
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--ink);
+}
+.btn-ghost:hover {
+  border-color: var(--sea);
+}
+.btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 1.25rem;
+  box-shadow: var(--shadow);
+}
+
+/* Long-form text in guides and legal pages. */
+.prose-sea {
+  max-width: 68ch;
+  line-height: 1.75;
+  font-size: 1.0625rem;
+}
+.prose-sea > * + * {
+  margin-top: 1.1em;
+}
+.prose-sea h2 {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  line-height: 1.25;
+  margin-top: 2.2em;
+  font-weight: 600;
+}
+.prose-sea h3 {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  margin-top: 1.8em;
+  font-weight: 600;
+}
+.prose-sea ul,
+.prose-sea ol {
+  padding-left: 1.4em;
+}
+.prose-sea ul {
+  list-style: disc;
+}
+.prose-sea ol {
+  list-style: decimal;
+}
+.prose-sea li + li {
+  margin-top: 0.4em;
+}
+.prose-sea li::marker {
+  color: var(--sea);
+}
+.prose-sea a {
+  color: var(--link);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.prose-sea strong {
+  font-weight: 700;
+}
+.prose-sea blockquote {
+  border-left: 4px solid var(--accent);
+  background: var(--surface);
+  padding: 0.8em 1.1em;
+  border-radius: 0 0.75rem 0.75rem 0;
+}
+.prose-sea code {
+  background: var(--surface-2);
+  padding: 0.1em 0.35em;
+  border-radius: 0.35em;
+  font-size: 0.92em;
+}
+.prose-sea table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+.prose-sea th,
+.prose-sea td {
+  border-bottom: 1px solid var(--line);
+  padding: 0.55em 0.6em;
+  text-align: left;
+  vertical-align: top;
+}
+
+/* A gentle swell for the hero boat; disabled for reduced motion. */
+@keyframes swell {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-1.5deg);
+  }
+  50% {
+    transform: translateY(-6px) rotate(1.5deg);
+  }
+}
+.swell {
+  animation: swell 6s ease-in-out infinite;
+  transform-origin: 50% 80%;
+}
+@media (prefers-reduced-motion: reduce) {
+  .swell {
+    animation: none;
+  }
+  * {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
